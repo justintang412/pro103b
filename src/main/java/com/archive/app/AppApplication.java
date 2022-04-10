@@ -1,13 +1,13 @@
-package com.archive.mgt;
+package com.archive.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MgtApplication {
+public class AppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MgtApplication.class, args);
+		SpringApplication.run(AppApplication.class, args);
 	}
 
 }
