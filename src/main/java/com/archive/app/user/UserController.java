@@ -14,9 +14,67 @@ public class UserController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    class RoleResponse {
+        String[] data;
+
+        public RoleResponse(String[] data) {
+            this.data = data;
+        }
+
+        public String[] getData() {
+            return data;
+        }
+
+        public void setData(String[] data) {
+            this.data = data;
+        }
+
+    }
+
+    class UserInfo {
+        String username;
+
+        public UserInfo(String username) {
+            this.username = username;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+    }
+
+    class UserInfoResponse {
+        Object data;
+
+        public UserInfoResponse(Object data) {
+            this.data = data;
+        }
+
+        public Object getData() {
+            return data;
+        }
+
+        public void setData(Object data) {
+            this.data = data;
+        }
+
+    }
+
     @GetMapping("/ccas/dashboard/user/info")
-    public String userInfo(@RequestHeader("Authorization") String token) {
+    public UserInfoResponse userInfo(@RequestHeader("Authorization") String token) {
         log.info("/ccas/dashboard/user/info", token);
-        return "";
+        UserInfoResponse resp = new UserInfoResponse(new UserInfo(token));
+        return resp;
+    }
+
+    @GetMapping("/ccas/dashboard/user/roles")
+    public RoleResponse roles(@RequestHeader("Authorization") String token) {
+        log.info("/ccas/dashboard/user/info", token);
+        return new RoleResponse(new String[] { "super_admin" });
     }
 }
