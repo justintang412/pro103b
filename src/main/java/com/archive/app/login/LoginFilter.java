@@ -13,7 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 @Order(1)
@@ -25,14 +24,10 @@ public class LoginFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse res = (HttpServletResponse) response;
         log.info(
                 "Logging Request  {} : {}", req.getMethod(),
                 req.getRequestURI());
         chain.doFilter(request, response);
-        log.info(
-                "Logging Response :{}",
-                res.getContentType());
     }
 
 }

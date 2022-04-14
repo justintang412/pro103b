@@ -48,3 +48,105 @@ CREATE TABLE `t_user` (
 
 INSERT INTO `t_user` VALUES ('admin','admin','true','sysadmin','true','0f395846-5612-4f89-9757-b46c5ca7f93f',1649679566139);
 
+CREATE TABLE archive.t_doc (
+	doc_id varchar(100) NOT NULL,
+	register_no varchar(100) NULL,
+	urgent_level varchar(100) NULL,
+	expire_date varchar(100) NULL,
+	owner_dept varchar(100) NULL,
+	secret_level varchar(100) NULL,
+	is_archived varchar(100) NULL,
+	process_note varchar(100) NULL,
+	create_year varchar(100) NULL,
+	doc_no varchar(100) NULL,
+	volumn_no varchar(100) NULL,
+	title varchar(100) NULL,
+	keywords varchar(100) NULL,
+	receiver varchar(100) NULL,
+	dispatch_note varchar(100) NULL,
+	remark varchar(100) NULL,
+	create_date varchar(100) NULL,
+	category varchar(100) NULL,
+	category_no varchar(100) NULL,
+	from_dept varchar(100) NULL,
+	copy_count int NULL,
+	page_count int NULL,
+	browser_note varchar(100) NULL  
+)
+ENGINE=InnoDB;
+
+ALTER TABLE archive.t_doc ADD CONSTRAINT t_doc_PK PRIMARY KEY (doc_id);
+ALTER TABLE archive.t_doc ADD status varchar(100) NULL;
+
+
+CREATE TABLE archive.t_codes (
+	code varchar(100) NOT NULL,
+	code_name varchar(100) NULL,
+	code_type varchar(100) NULL,
+	CONSTRAINT t_codes_PK PRIMARY KEY (code)
+)
+ENGINE=InnoDB;
+
+insert into archive.t_codes (code, code_name, code_type) values ('urgent_level_1','一般','urgent_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('urgent_level_2','紧急','urgent_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('secret_level_1','秘密','secret_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('secret_level_2','机密','secret_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('secret_level_3','绝密','secret_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('secret_level_2','机密','secret_level')；
+insert into archive.t_codes (code, code_name, code_type) values ('secret_level_3','绝密','secret_level')；
+
+
+CREATE TABLE archive.t_volumn (
+	volumn_no varchar(100) NULL,
+	volumn_note varchar(100) NULL,
+	CONSTRAINT t_volumn_PK PRIMARY KEY (volumn_no)
+)
+ENGINE=InnoDB;
+
+INSERT INTO archive.t_volumn (volumn_no, volumn_note) VALUES('V-Test-0001', 'Test Volumn');
+
+CREATE TABLE archive.t_category_no (
+	category_no varchar(100) NULL,
+	category_no_note varchar(100) NULL,
+	CONSTRAINT t_category_no_PK PRIMARY KEY (category_no)
+)
+ENGINE=InnoDB;
+
+INSERT INTO archive.t_category_no (category_no, category_no_note) VALUES('馆字〔2022〕07号', '馆字〔2022〕07号');
+
+CREATE TABLE archive.t_category (
+	category_id varchar(100) NOT NULL,
+	category_name varchar(100) NULL,
+	category_level int NULL,
+	parent_category varchar(100) NULL,
+	category_note varchar(100) NULL,
+	CONSTRAINT t_category_PK PRIMARY KEY (category_id)
+)
+ENGINE=InnoDB;
+
+INSERT INTO archive.t_category (category_id, category_name, category_level, parent_category, category_note) VALUES('1', '会计档案', 1, NULL, NULL);
+INSERT INTO archive.t_category (category_id, category_name, category_level, parent_category, category_note) VALUES('2', '会计凭证', 2, '1', NULL);
+INSERT INTO archive.t_category (category_id, category_name, category_level, parent_category, category_note) VALUES('3', '会计账簿', 2, '1', NULL);
+INSERT INTO archive.t_category (category_id, category_name, category_level, parent_category, category_note) VALUES('4', '财务报告', 2, '1', NULL);
+
+CREATE TABLE archive.t_department (
+	department_id varchar(100) NOT NULL,
+	department_name varchar(100) NULL,
+	CONSTRAINT t_department_PK PRIMARY KEY (department_id)
+)
+ENGINE=InnoDB;
+
+INSERT INTO archive.t_department (department_id, department_name) VALUES('1', '阜阳档案管理局');
+
+CREATE TABLE archive.t_doc_no (
+	doc_no varchar(100) NOT NULL,
+	doc_no_note varchar(100) NULL,
+	CONSTRAINT t_doc_no_PK PRIMARY KEY (doc_no)
+)
+ENGINE=InnoDB;
+INSERT INTO archive.t_doc_no (doc_no, doc_no_note) VALUES('京统发【2022】1号', '京统发【2022】1号');
+
+
+INSERT INTO archive.t_doc
+(doc_id, register_no, urgent_level, expire_date, owner_dept, secret_level, is_archived, process_note, create_year, doc_no, volumn_no, title, keywords, receiver, dispatch_note, remark, create_date, category, category_no, from_dept, copy_count, page_count, browser_note, status)
+VALUES('1', '2022041400001', 'urgent_level_1', '2032-04-14', '1', 'secret_level_1', '1', NULL, '2022', '京统发【2022】1号', 'V-Test-0001', '关于信息化管理的若干问题', '管理 信息 档案', '1', NULL, NULL, '2022-04-14', '1', '馆字〔2022〕07号', '1', 1, 324, NULL, '0');
