@@ -57,7 +57,7 @@ public class VolumnNoController {
         }
 
     }
-    @GetMapping("/ccas/collect/volumnno")
+    @GetMapping("/api/collect/volumnno")
     public VolumnNoResponse getVolumnNo() {
         log.info("serving getVolumnNo");
         return new VolumnNoResponse(

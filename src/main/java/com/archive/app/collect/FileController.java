@@ -339,7 +339,7 @@ public class FileController {
 
     }
 
-    @GetMapping("/ccas/collect/files")
+    @GetMapping("/api/collect/files")
     public DataResponse<DocFile> getDocFiles(SearchForm searchForm) {
         log.info("--------------getDocFiles------------------");
         String sql = "SELECT doc_id, register_no, urgent_level, expire_date, owner_dept, secret_level, " +

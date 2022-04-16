@@ -47,7 +47,7 @@ public class DictionaryController {
     }
 
 
-    @GetMapping("/ccas/sys/code")
+    @GetMapping("/api/sys/code")
     public DataResponse<Code> getCode(@RequestParam String type) {
         log.info("serving " + type);
         List<Map<String, Object>> codes = jdbcTemplate.queryForList(

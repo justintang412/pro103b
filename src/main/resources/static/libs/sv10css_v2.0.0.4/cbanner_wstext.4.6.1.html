@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  <link rel="stylesheet" href="css/SV-callbanner-text-4.2.css" type="text/css" />  
+ 	<script src="js/jquery.min.js"></script>  
+  <script src="js/SV-callbanner-common-cms-4.6.1.js"></script>
+  <script src="js/SV-callbanner-common-engine-4.6.2.js"></script>
+  <script src="js/SV-callbanner-common-wscomm-1.0.0.js"></script>
+  <script src="js/SV-callbanner-common-ui-cs-4.6.1.js"></script>
+  <script src="js/SV-callbanner-common-jieru-0227.js"></script>
+  <script src="js/SV-callbanner-common-cmclient-1.0.0.js"></script>
+</head>
+<body id="body" style="display: none;">
+	<div class="call_banner_main">
+    <ul>
+			<p class="cb_status_box">
+				<span id="hs_mainstatus" class="cb_status1"></span>
+			</p>							
+			<li class="cb_btn_enable phone-fl" id="phone_num">
+				<input id="dialout_input" class="cb_telno" name="telnumber" type="text" placeholder="请输入电话号码"/>
+			</li>
+			<li id="btn_callout" fun_value="0" class="phone-fl"><img title="呼出" /><span></span></li>
+			<li id="btn_hold_unhold" fun_value="0" class="phone-fl"><img title="保持"/><span></span></li>
+			<!-- advanced skill -->
+			<li id="btn_consult" fun_value="0" class="phone-fl"><img title="咨询"/><span></span></li>
+			<li id="btn_transfer" fun_value="0" class="phone-fl" ><img title="转移"/><span></span></li>
+			<li id="btn_confence" fun_value="0" class="phone-fl"><img title="三方"/><span></span></li>
+			<li id="btn_toivr" fun_value="0" class="phone-fl"><img title="转调查"/><span></span></li>
+     <!--monitor skill for miniter-->
+    </ul>
+    <ul id="skill_monitor">
+			<li id="btn_monitor" fun_value="0"  class="phone-fl"><img title="监听"/><span></span></li>
+			<li id="btn_stop_monitor" fun_value="0"  class="phone-fl"><img title="停止监听"/><span></span></li>          
+			<li id="btn_force_join" fun_value="0"  class="phone-fl"><img title="插话"><span></span></li>
+			<li id="btn_whisper" fun_value="0"  class="phone-fl"><img title="耳语"><span></span></li>
+			<li id="btn_tokeover" fun_value="0"  class="phone-fl"><img title="强接"><span></span></li>
+			<li id="btn_force_hungup" fun_value="0"  class="phone-fl"><img title="强拆"><span></span></li>
+			<li id="btn_monqueue" fun_value="0"  class="phone-fl"><img title="队列"><span></span></li> 
+    </ul>
+    <ul class="ml">
+		<li id="btn_onoff_line"  value="0" class="phone-fl"><img title="上线"/><span></span></li>
+		<li id="btn_login" fun_value="0" class="phone-fl"><img title="签入"><span></span></li>
+		<li id="btn_ready_busy" fun_value="0" class="phone-fl"><img title="状态" onclick="state0();">
+			<span id="various">空闲</span>
+		</li>
+	</ul>
+		<div id="msgivr1" class="disnone">
+			<div id="boxivr1">转流程<font class="f1">×</font></div>
+			<span>状态:</span>
+			<select name="sel_ivr1" id="sel_ivr1" class="cb_btn_state">
+				<option value="flow">转IVR</option>
+				<option value="auth">转鉴权</option>
+				<option value="drop">转满意度</option>
+			</select>
+			<span>主流程:</span><input id="ivrmainid1" value="184"/>
+			<span>子流程:</span><input id="ivrsubid1" value="184"/>
+			<span>随路数据:</span><input id="ivrdata1" value=""/>
+			<span></span><input type="button" value="确定" onclick="transflow1();"/>
+		</div>
+</div>
+	<script>
+		g_DisEnableBtnStyle="" ; //  "hidden";//  "disable";
+		var imgDoms = document.body.querySelectorAll('img')
+		imgDoms.forEach(function (dom) {
+			if (!dom.src) {
+				dom.parentElement.style.opacity = 0
+				dom.onload = function (e) {
+					dom.parentElement.style.opacity = 1
+					dom.onload = null
+				}
+			}
+		})
+		document.body.style = 'block'
+	</script>
+</body>
+</html>

@@ -59,7 +59,7 @@ public class CategoryNoController {
 
     }
 
-    @GetMapping("/ccas/collect/categoryno")
+    @GetMapping("/api/collect/categoryno")
     public CategoryNoResponse getCategoryNo() {
         log.info("serving getCategoryNo");
         List<CategoryNo> codeList = jdbcTemplate.queryForList(

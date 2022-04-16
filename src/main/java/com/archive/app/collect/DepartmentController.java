@@ -59,7 +59,7 @@ public class DepartmentController {
 
     }
     
-    @GetMapping("/ccas/collect/department")
+    @GetMapping("/api/collect/department")
     public DepartmentResponse getDepartments() {
         return new DepartmentResponse(jdbcTemplate
                 .queryForList("select department_id, department_name from t_department order by department_id asc")

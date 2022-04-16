@@ -65,3 +65,37 @@ docker pull mariadb
 docker run --name archive-mariadb -e MARIADB_ROOT_PASSWORD=root -d -p 3306:3306 mariadb:latest
 docker container stop archive-mariadb
 docker container rm archive-mariadb
+
+create a file named dockerfile
+docker build .
+
+docker tag <image-id> justintang412/private:archive-app
+
+docker run --name archive-app -e MARIADB_ROOT_PASSWORD=root -d -p 3306:3306 -p 3000:3000 -p 8080:8080 justintang412/private:archive-app-01
+
+To commit a new image from a running container:
+docker ps
+docker commit <container id> justintang412/private:archive-app-02
+
+To run an image:
+docker run --name archive-app -d -p 3306:3306 -p 3000:3000 -p 8080:8080 justintang412/private:archive-app-03
+
+To find version of linux of the docker:
+cat /etc/os-release
+
+apt install default-jdk
+
+To deploy to docker:
+mvn package
+docker cp C:\Users\tang\Desktop\pro103b\target\app-0.0.1-SNAPSHOT.jar archive-app:/root/
+
+cp C:\Users\tang\Desktop\pro103b\docker\jdk18.sh archive-app:/etc/profile.d/
+
+tar xvf openjdk-18_linux-x64_bin.tar.gz
+mv jdk-18 /opt/
+export JAVA_HOME=/opt/jdk-18
+export PATH=$PATH:$JAVA_HOME/bin
+
+To reset vscode:
+delete content in %APPDATA%\Code and %USERPROFILE%\.vscode and everything is brand new.
+

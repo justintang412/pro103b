@@ -40,7 +40,7 @@ public class DocNoController {
         }
 
     }
-    @GetMapping("/ccas/collect/docno")
+    @GetMapping("/api/collect/docno")
     public DataResponse<DocNo> getDocNo() {
         log.info("serving getDocNo");
         return new DataResponse<DocNo>(

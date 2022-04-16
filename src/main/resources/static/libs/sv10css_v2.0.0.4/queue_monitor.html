@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Complex DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/SV-callbanner-common-cms-4.6.1.js"></script>
+	<script>
+		$(function(){
+			$('#test').datagrid({
+				title:'坐席状态查询',
+				iconCls:'icon-save',
+				width:700,
+				height:350,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				collapsible:true,
+				url:'',
+				sortName: 'code',
+				sortOrder: 'desc',
+				remoteSort: false,
+				idField:'id',
+				columns:[
+ 				[
+					{field:'id',title:'队列ID',width:120,sortable:true},
+					{field:'name',title:'名称',width:120,sortable:true,
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						}
+					},
+					{field:'readycnt',title:'空闲座席数',width:120},
+					{field:'busycnt',title:'繁忙座席数',width:120},
+					{field:'waitusercount',title:'等待用户数',width:120}
+				]],
+				pagination:true,
+				rownumbers:true
+			});
+			var p = $('#test').datagrid('getPager');
+			$(p).pagination({
+				onBeforeRefresh:function(){
+					alert('before refresh');
+				}
+			});
+		});
+
+		/**********************************************
+		 * 获取坐席所在组全部坐席的状态， 
+		 * @param callback_func 回调函数
+		 * @param qId           队列id
+		 * @param workno        工号或者姓名
+		 * @param states   坐席状态集合
+		 * @param toNext : 0 上一页，1 下一页
+		 **********************************************/ 
+		function searchqueueList(){
+		  	var queid = document.getElementById("queueId").value ;		
+		   window.opener.getEntStateInfo(queid);
+		   window.opener.entgetflag = "2";
+		   setTimeout("onGetQueueState()",1000);
+		} 
+
+    function onGetQueueState(){
+		var flag = window.opener.entgetflag;
+			if(flag=="2"){
+				setTimeout("onGetQueueState()",1000);
+			}else if(flag=="1"){
+				window.opener.entgetflag = "0";
+				var data1=window.opener.entques;
+				if(data1.totalnum == 0){
+					alert("无记录");
+				}else{
+					$('#test').datagrid('loadData', data1.detail );
+				}
+			}	    
+	}
+
+		var _workNo = top.window.frames["ifr_callbanner"].contentWindow._workNo;//  GetQueryString("_workNo");
+		var _entId = top.window.frames["ifr_callbanner"].contentWindow._entId;// GetQueryString("_entId");
+		var _entPwd = top.window.frames["ifr_callbanner"].contentWindow._entPwd;// GetQueryString("_entPwd");
+		var _cmsUrl = "/cmserver/service/softphonesvc";
+		var _tokenId = top.window.frames["ifr_callbanner"].contentWindow.g_TokenId
+		alert(_tokenId);
+		cmsHelper.setCmsUrl(_cmsUrl);
+		cmsHelper.setAuthInfo(_entId,_workNo,_tokenId);
+	</script>
+</head>
+<body>
+	<h2>队列监控</h2>
+	<div style="margin:10px 0;">
+	    <span>坐席组 ID</span>
+	    <span><input type="text" id="queueId" value="1" > </span>
+	   <input type ="button" value="查询" onclick="searchqueueList()" >
+	</div>
+		<table id="test"></table>
+</body>
+</html>

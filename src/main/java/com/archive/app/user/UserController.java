@@ -65,14 +65,14 @@ public class UserController {
 
     }
 
-    @GetMapping("/ccas/dashboard/user/info")
+    @GetMapping("/api/dashboard/user/info")
     public UserInfoResponse userInfo(@RequestHeader("Authorization") String token) {
         log.info("/ccas/dashboard/user/info", token);
         UserInfoResponse resp = new UserInfoResponse(new UserInfo(token));
         return resp;
     }
 
-    @GetMapping("/ccas/dashboard/user/roles")
+    @GetMapping("/api/dashboard/user/roles")
     public RoleResponse roles(@RequestHeader("Authorization") String token) {
         log.info("/ccas/dashboard/user/info", token);
         return new RoleResponse(new String[] { "super_admin" });

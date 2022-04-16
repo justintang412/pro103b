@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @PostMapping("/ccas/dashboard/login")
+    @PostMapping("/api/dashboard/login")
     public void login(LoginForm loginForm, final HttpServletResponse response) {
         log.info("----------------------");
         if (loginForm.getUsername() == null || loginForm.getT() == null || loginForm.getPassword() == null

@@ -25,7 +25,7 @@ public class CaptchaController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    @GetMapping("/ccas/dashboard/captcha/image")
+    @GetMapping("/api/dashboard/captcha/image")
     public String captcha(@RequestParam String t) {
         Captcha captcha = new Captcha.Builder(110, 110)
                 .addBackground(new GradiatedBackgroundProducer())

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Complex DataGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/SV-callbanner-common-cms-4.6.1.js"></script>
+	<script>
+		$(function(){
+			$('#test').datagrid({
+				title:'坐席状态查询',
+				iconCls:'icon-save',
+				width:780,
+				height:350,
+				nowrap: true,
+				autoRowHeight: false,
+				striped: true,
+				collapsible:true,
+				url:'',
+				sortName: 'code',
+				sortOrder: 'desc',
+				remoteSort: false,
+				idField:'workno',
+				columns:[
+ 				[
+					{field:'workno',title:'工号',width:50,sortable:true},
+					{field:'workname',title:'姓名',width:80,sortable:true,
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						}
+					},
+					{field:'callincnt',title:'已经接听数',width:80,sortable:true},
+					{field:'calloutcnt',title:'外呼成功数',width:80,sortable:true},
+					{field:'queueid',title:'技能组',width:40,sortable:true},
+					{field:'buttonoptions',title:'可监控？',width:40,sortable:true},
+					{field:'callstate',title:'状态',width:40,sortable:true,
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						},
+
+						formatter: function(value,row,index){
+						    switch(value)
+						    { 
+						      case "0": return "签出";
+						      case "1": return "就绪";
+						      case "2": return "上线";
+						      case "3": return "通话";
+						      case "31": return "呼叫";
+						      case "32": return "振铃";
+						      case "4": return "忙";
+						      case "5": return "保持";
+						      case "6": return "咨询";
+						      case "7": return "咨询";
+						      case "8": return "会议";
+						      case "9": return "监听";
+						      case "10": return "插话";
+						      case "11": return "上线忙";
+						      default:return value ;
+						    }
+						}
+					},
+					{field:'callstatetime',title:'状态保持时间',width:80,sortable:true},
+					{field:'statetimelen',title:'状态保持时间',width:80,sortable:true},
+					{field:'timelen',title:'通话总时长',width:80,sortable:true},
+					{field:'opt',title:'操作',align:'center',
+						formatter:function(value,rec){
+						    var linkStr= "";
+						    if( (rec.buttonoptions & 1) == 1)
+						      linkStr="<a onclick= monitorAgent('"+rec.workno+"')  ><span style='color:green'>监听</span></a> ";
+						      else
+						      linkStr="<span style='color:gray'>监听</span>";
+						     if( (rec.buttonoptions & 2) == 2) 
+						     { 						        
+						        linkStr +="<a onclick= logoutAgent('"+rec.workno+"')  ><span style='color:green'>&nbsp;&nbsp;签出</span></a> ";
+						     }
+						     else
+						     { 
+							     linkStr +="<span style='color:gray'>&nbsp;&nbsp;签出</span>";
+                 }
+ 							return linkStr;
+						}
+					}
+				]],
+				pagination:true,
+				rownumbers:true
+			});
+
+			var p = $('#test').datagrid('getPager');
+			$(p).pagination({
+				onBeforeRefresh:function(){
+					alert('before refresh');
+				}
+			});
+		});
+
+	/**********************************************
+		 * 获取坐席所在组全部坐席的状态， 
+		 * @param callback_func 回调函数
+		 * @param qId           队列id
+		 * @param workno        工号或者姓名
+		 * @param states   坐席状态集合
+		 * @param toNext : 0 上一页，1 下一页
+		 **********************************************/ 
+		function searchAgentList(){
+		//状态列表
+		   var states= ""; // "3,5,8,11";  //坐席工作状态集合
+  		   var worknos = document.getElementById("worknos").value ;
+		   window.opener.getAgcListState(worknos);
+		   window.opener.agentgetflag = "2";
+		   setTimeout("onGetQueueAgcState()",1000);
+		} 
+
+    function onGetQueueAgcState(){	
+			var flag = window.opener.agentgetflag;
+			if(flag=="2"){
+				setTimeout("onGetQueueAgcState()",1000);
+			}else if(flag=="1"){
+				window.opener.agentgetflag = "0";
+				var data1=window.opener.agentlists; 
+				if(data1.totalnum == 0){
+					alert("无记录");
+				}else{
+					$('#test').datagrid('loadData', data1.detail );
+				}
+			}
+	   }  
+
+	function monitorAgent(agentId)
+	{ 
+	   window.opener.FlashAgentX.monitor(agentId);    
+
+	}
+
+	//代签出
+	function logoutAgent(agentId)
+	{
+	   window.opener.FlashAgentX.tocheckout(agentId);
+		setTimeout("searchAgentList()",3000);
+	}
+	</script>
+</head>
+
+<body>
+	<h2>坐席状态监控</h2>
+	<div style="margin:10px 0;">
+	    <span>坐席工号串</span>
+	    <span><input type="text" id="worknos" value="" > </span>
+	    <input type ="button" value="查询" onclick="searchAgentList()" >   
+	</div>
+	<table id="test"></table>
+</body>
+</html>

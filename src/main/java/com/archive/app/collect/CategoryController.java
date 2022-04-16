@@ -66,7 +66,7 @@ public class CategoryController {
 
     
 
-    @GetMapping("/ccas/collect/category")
+    @GetMapping("/api/collect/category")
     public DataResponse<CategoryNode> getCategory() {
         log.info("serving getCategory");
         List<Map<String, Object>> codes = jdbcTemplate.queryForList(
