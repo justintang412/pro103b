@@ -24,9 +24,10 @@ public class LoginFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
+        
         log.info(
-                "Logging Request  {} : {}", req.getMethod(),
-                req.getRequestURI());
+                "Logging Request  {} : {} : {}", req.getMethod(),
+                req.getRequestURI(),req.getHeader("Authorization"));
         chain.doFilter(request, response);
     }
 

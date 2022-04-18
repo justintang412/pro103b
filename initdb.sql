@@ -346,3 +346,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-04-15  8:17:12
+
+ALTER TABLE archive.t_doc ADD create_user varchar(100) NULL;

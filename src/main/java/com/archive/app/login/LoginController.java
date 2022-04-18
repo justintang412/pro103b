@@ -40,7 +40,7 @@ public class LoginController {
         if (userList.size() == 0 || !userList.get(0).get("password").toString().equals(loginForm.getPassword())) {
             return;
         }
-        String token = UUID.randomUUID().toString();
+        String token = loginForm.getUsername()+":"+UUID.randomUUID().toString();
         log.info(token);
         long expire = new Date().getTime() + 12 * 3600000;
         jdbcTemplate.execute(

@@ -1,5 +1,8 @@
 package com.archive.app.collect;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,7 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -393,4 +400,26 @@ public class FileController {
         return new DataResponse<DocFile>(list);
     }
 
+    @PostMapping("/collect/saveOrUpdate")
+    public void saveOrUpate(DocFile file) {
+        final String INSERT_SQL = "INSERT INTO archive.t_doc "+
+        "(doc_id, register_no, urgent_level, expire_date, owner_dept, secret_level, is_archived, "+
+        "process_note, create_year, doc_no, volumn_no, title, keywords, receiver, dispatch_note, remark, "+
+        "create_date, category, category_no, from_dept, copy_count, page_count, browser_note, status, create_user) "+
+        "VALUES('', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+        KeyHolder holder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			@Override
+			public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(INSERT_SQL, Statement.RETURN_GENERATED_KEYS);
+				ps.setString(1, user.getName());
+				ps.setString(2, user.getAddress());
+				ps.setString(3, user.getEmail());
+				return ps;
+			}
+		}, holder);
+
+		int newUserId = holder.getKey().intValue();
+		user.setId(newUserId);
+    }
 }
