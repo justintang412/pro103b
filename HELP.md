@@ -66,12 +66,17 @@ docker run --name archive-mariadb -e MARIADB_ROOT_PASSWORD=root -d -p 3306:3306 
 docker container stop archive-mariadb
 docker container rm archive-mariadb
 
+Build and package jar file for backend:
+mvn package
+
 create a file named dockerfile
-docker build .
+docker build -t archive-app-03 .
 
 docker tag <image-id> justintang412/private:archive-app
 
 docker run --name archive-app -e MARIADB_ROOT_PASSWORD=root -d -p 3306:3306 -p 3000:3000 -p 8080:8080 justintang412/private:archive-app-01
+
+docker run --name archive-app -d -p 3306:3306 archive-03
 
 To commit a new image from a running container:
 docker ps
