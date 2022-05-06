@@ -35,7 +35,7 @@ CREATE TABLE `log_captcha` (
 
 LOCK TABLES `log_captcha` WRITE;
 /*!40000 ALTER TABLE `log_captcha` DISABLE KEYS */;
-INSERT INTO `log_captcha` VALUES ('1649576078954','w5dr8'),('1649576092447','dbefp'),('1649576167660','a2d24'),('1649576174387','88kba'),('1649577032034','chbww'),('1649577040469','p43hg'),('1649577048724','w37dg'),('1649590798858','hehwx'),('1649590875836','8php8'),('1649590892161','wwaeg'),('1649590997607','rykpw'),('1649591450323','5d33x'),('1649591480471','yeb7m'),('1649591943458','wfkwy'),('1649591952471','rpdr4'),('1649591953517','pmkan'),('1649591957742','k3gw2'),('1649591966624','nkg2w'),('1649592037556','cxrb2'),('1649592078018','re3wp'),('1649592201123','fmfg4'),('1649592244289','y7bfg'),('1649592590897','6apmp'),('1649592609960','kww6y'),('1649592664673','fkd7b'),('1649592679396','hb82m'),('1649593239107','4bg35'),('1649593342369','348er'),('1649593388885','p7ed6'),('1649593963714','5kycp'),('1649593975648','6xk2x'),('1649594025932','e3y8p'),('1649594026216','an3rr'),('1649594227321','ge868'),('1649594249950','y7445'),('1649594265908','wxmey'),('1649594560723','24hrm'),('1649594587468','8ahrb'),('1649594721731','wb6e3'),('1649594943995','harc6'),('1649594964525','exbhp'),('1649631719231','823nc'),('1649631734776','2hb4e'),('1649631771998','6yepw'),('1649631864938','4rae3'),('1649631880708','r2e7d'),('1649631889200','x233y'),('1649632110470','kc36r'),('1649635991887','w72wy'),('1649636153502','3ny3k'),('1649636164378','dhgxe'),('1649636243523','mgncm'),('1649636352381','pph42');
+INSERT INTO `log_captcha` VALUES ('1649576078954','w5dr8'),('1649576092447','dbefp'),('1649576167660','a2d24'),('1649576174387','88kba'),('1649577032034','chbww'),('1649577040469','p43hg'),('1649577048724','w37dg'),('1649590798858','hehwx'),('1649590875836','8php8'),('1649590892161','wwaeg'),('1649590997607','rykpw'),('1649591450323','5d33x'),('1649591480471','yeb7m'),('1649591943458','wfkwy'),('1649591952471','rpdr4'),('1649591953517','pmkan'),('1649591957742','k3gw2'),('1649591966624','nkg2w'),('1649592037556','cxrb2'),('1649592078018','re3wp'),('1649592201123','fmfg4'),('1649592244289','y7bfg'),('1649592590897','6apmp'),('1649592609960','kww6y'),('1649592664673','fkd7b'),('1649592679396','hb82m'),('1649593239107','4bg35'),('1649593342369','348er'),('1649593388885','p7ed6'),('1649593963714','5kycp'),('1649593975648','6xk2x'),('1649594025932','e3y8p'),('1649594026216','an3rr'),('1649594227321','ge868'),('1649594249950','y7445'),('1649594265908','wxmey'),('1649594560723','24hrm'),('1649594587468','8ahrb'),('1649594721731','wb6e3'),('1649594943995','harc6'),('1649594964525','exbhp'),('1649631719231','823nc'),('1649631734776','2hb4e'),('1649631771998','6yepw'),('1649631864938','4rae3'),('1649631880708','r2e7d'),('1649631889200','x233y'),('1649632110470','kc36r'),('1649635991887','w72wy'),('1649636153502','3ny3k'),('1649636164378','dhgxe'),('1649636243523','mgncm'),('1649636352381','pph42'),('1650299545147','5w5f2'),('1651591871166','hcawr');
 /*!40000 ALTER TABLE `log_captcha` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,54 +63,28 @@ LOCK TABLES `m_right_role` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_category`
+-- Table structure for table `t_archive_group`
 --
 
-DROP TABLE IF EXISTS `t_category`;
+DROP TABLE IF EXISTS `t_archive_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_category` (
-  `category_id` varchar(100) NOT NULL,
-  `category_name` varchar(100) DEFAULT NULL,
-  `category_level` int(11) DEFAULT NULL,
-  `parent_category` varchar(100) DEFAULT NULL,
-  `category_note` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `t_archive_group` (
+  `archive_no` varchar(100) NOT NULL,
+  `archive_name` varchar(100) DEFAULT NULL,
+  `department_id` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`archive_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='全宗';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_category`
+-- Dumping data for table `t_archive_group`
 --
 
-LOCK TABLES `t_category` WRITE;
-/*!40000 ALTER TABLE `t_category` DISABLE KEYS */;
-INSERT INTO `t_category` VALUES ('1','会计档案',1,NULL,NULL),('2','会计凭证',2,'1',NULL),('3','会计账簿',2,'1',NULL),('4','财务报告',2,'1',NULL);
-/*!40000 ALTER TABLE `t_category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_category_no`
---
-
-DROP TABLE IF EXISTS `t_category_no`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_category_no` (
-  `category_no` varchar(100) NOT NULL,
-  `category_no_note` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`category_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_category_no`
---
-
-LOCK TABLES `t_category_no` WRITE;
-/*!40000 ALTER TABLE `t_category_no` DISABLE KEYS */;
-INSERT INTO `t_category_no` VALUES ('馆字〔2022〕07号','馆字〔2022〕07号');
-/*!40000 ALTER TABLE `t_category_no` ENABLE KEYS */;
+LOCK TABLES `t_archive_group` WRITE;
+/*!40000 ALTER TABLE `t_archive_group` DISABLE KEYS */;
+INSERT INTO `t_archive_group` VALUES ('全宗-001','阜阳档案管理局','1');
+/*!40000 ALTER TABLE `t_archive_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -121,10 +95,10 @@ DROP TABLE IF EXISTS `t_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_codes` (
-  `code` varchar(100) NOT NULL,
+  `code_id` varchar(100) NOT NULL,
   `code_name` varchar(100) DEFAULT NULL,
   `code_type` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`code`)
+  PRIMARY KEY (`code_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -163,73 +137,79 @@ INSERT INTO `t_department` VALUES ('1','阜阳档案管理局');
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_doc`
+-- Table structure for table `t_file`
 --
 
-DROP TABLE IF EXISTS `t_doc`;
+DROP TABLE IF EXISTS `t_file`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_doc` (
-  `doc_id` varchar(100) NOT NULL,
-  `register_no` varchar(100) DEFAULT NULL,
-  `urgent_level` varchar(100) DEFAULT NULL,
-  `expire_date` varchar(100) DEFAULT NULL,
-  `owner_dept` varchar(100) DEFAULT NULL,
-  `secret_level` varchar(100) DEFAULT NULL,
-  `is_archived` varchar(100) DEFAULT NULL,
-  `process_note` varchar(100) DEFAULT NULL,
-  `create_year` varchar(100) DEFAULT NULL,
-  `doc_no` varchar(100) DEFAULT NULL,
-  `volumn_no` varchar(100) DEFAULT NULL,
-  `title` varchar(100) DEFAULT NULL,
-  `keywords` varchar(100) DEFAULT NULL,
-  `receiver` varchar(100) DEFAULT NULL,
-  `dispatch_note` varchar(100) DEFAULT NULL,
-  `remark` varchar(100) DEFAULT NULL,
-  `create_date` varchar(100) DEFAULT NULL,
-  `category` varchar(100) DEFAULT NULL,
-  `category_no` varchar(100) DEFAULT NULL,
-  `from_dept` varchar(100) DEFAULT NULL,
-  `copy_count` int(11) DEFAULT NULL,
-  `page_count` int(11) DEFAULT NULL,
-  `browser_note` varchar(100) DEFAULT NULL,
-  `status` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`doc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `t_file` (
+  `file_no` varchar(100) NOT NULL COMMENT '室编档号',
+  `department_file_no` varchar(100) DEFAULT NULL COMMENT '部门档号',
+  `global_file_no` varchar(100) DEFAULT NULL COMMENT '馆编档号',
+  `file_title` varchar(100) DEFAULT NULL COMMENT '题名',
+  `alternative_title` varchar(100) DEFAULT NULL COMMENT '并列题名',
+  `series_no` varchar(100) DEFAULT NULL COMMENT '类目号',
+  `file_year` varchar(100) DEFAULT NULL COMMENT '年度',
+  `refer_global_file_no` varchar(100) DEFAULT NULL COMMENT '参见号',
+  `valid_years` int(11) DEFAULT NULL COMMENT '保管期限，年，0=永久',
+  `pages` int(11) DEFAULT NULL COMMENT '页数',
+  `security_classification` varchar(100) DEFAULT NULL COMMENT '密级',
+  `department_id` varchar(100) DEFAULT NULL COMMENT '所属部门',
+  `archive_value` varchar(100) DEFAULT NULL COMMENT '档案价值',
+  `store_location` varchar(100) DEFAULT NULL COMMENT '存储位置',
+  `archived_by` varchar(100) DEFAULT NULL COMMENT '归档人',
+  `date_archived` varchar(100) DEFAULT NULL COMMENT '归档日期',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`file_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='卷';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_doc`
+-- Dumping data for table `t_file`
 --
 
-LOCK TABLES `t_doc` WRITE;
-/*!40000 ALTER TABLE `t_doc` DISABLE KEYS */;
-INSERT INTO `t_doc` VALUES ('1','2022041400001','urgent_level_1','2032-04-14','1','secret_level_1','1',NULL,'2022','京统发【2022】1号','V-Test-0001','关于信息化管理的若干问题','管理 信息 档案','1',NULL,NULL,'2022-04-14','1','馆字〔2022〕07号','1',1,324,NULL,'0');
-/*!40000 ALTER TABLE `t_doc` ENABLE KEYS */;
+LOCK TABLES `t_file` WRITE;
+/*!40000 ALTER TABLE `t_file` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_file` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `t_doc_no`
+-- Table structure for table `t_item`
 --
 
-DROP TABLE IF EXISTS `t_doc_no`;
+DROP TABLE IF EXISTS `t_item`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_doc_no` (
-  `doc_no` varchar(100) NOT NULL,
-  `doc_no_note` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`doc_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `t_item` (
+  `item_id` varchar(100) NOT NULL COMMENT 'UUID',
+  `file_no` varchar(100) DEFAULT NULL COMMENT '卷号',
+  `item_no` varchar(100) DEFAULT NULL COMMENT '件号',
+  `item_date` varchar(100) DEFAULT NULL COMMENT '件日期',
+  `item_size` varchar(100) DEFAULT NULL COMMENT '电子文件大小',
+  `item_full_name` varchar(100) DEFAULT NULL COMMENT '电子全文名称',
+  `item_format` varchar(100) DEFAULT NULL COMMENT '电子文件格式',
+  `item_version` varchar(100) DEFAULT NULL COMMENT '版本号',
+  `e_item_no` varchar(100) DEFAULT NULL COMMENT '室编电子文档号',
+  `department_e_item_no` varchar(100) DEFAULT NULL COMMENT '部门电子文档号',
+  `global_e_item_no` varchar(100) DEFAULT NULL COMMENT '馆编电子文档号',
+  `key_words` varchar(100) DEFAULT NULL COMMENT '关键词',
+  `pages` varchar(100) DEFAULT NULL COMMENT '页数',
+  `pysical_file_id` varchar(100) DEFAULT NULL COMMENT '文件UUID',
+  `receiver` varchar(100) DEFAULT NULL COMMENT '接收人',
+  `receive_date` varchar(100) DEFAULT NULL COMMENT '接收日期',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='件';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_doc_no`
+-- Dumping data for table `t_item`
 --
 
-LOCK TABLES `t_doc_no` WRITE;
-/*!40000 ALTER TABLE `t_doc_no` DISABLE KEYS */;
-INSERT INTO `t_doc_no` VALUES ('京统发【2022】1号','京统发【2022】1号');
-/*!40000 ALTER TABLE `t_doc_no` ENABLE KEYS */;
+LOCK TABLES `t_item` WRITE;
+/*!40000 ALTER TABLE `t_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -280,6 +260,34 @@ INSERT INTO `t_role` VALUES ('admin','admin'),('operator','operator'),('sysadmin
 UNLOCK TABLES;
 
 --
+-- Table structure for table `t_series`
+--
+
+DROP TABLE IF EXISTS `t_series`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_series` (
+  `series_no` varchar(100) NOT NULL COMMENT '目录号',
+  `series_name` varchar(100) DEFAULT NULL COMMENT '类目名称',
+  `archive_no` varchar(100) DEFAULT NULL COMMENT '全宗号',
+  `file_type` varchar(100) DEFAULT NULL COMMENT 'item, file, project,不立卷，案卷，项目',
+  `department_id` varchar(100) DEFAULT NULL COMMENT '如果不是按照部门，此字段是NULL',
+  `sort_no` int(11) DEFAULT NULL COMMENT '序号',
+  PRIMARY KEY (`series_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='目录（全宗下面的树形结构）';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_series`
+--
+
+LOCK TABLES `t_series` WRITE;
+/*!40000 ALTER TABLE `t_series` DISABLE KEYS */;
+INSERT INTO `t_series` VALUES ('1','会计档案',NULL,NULL,NULL,NULL),('2','会计凭证',NULL,NULL,NULL,NULL),('3','会计账簿',NULL,NULL,NULL,NULL),('4','财务报告',NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `t_series` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `t_user`
 --
 
@@ -304,32 +312,8 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-INSERT INTO `t_user` VALUES ('admin','admin','true','sysadmin','true','0f395846-5612-4f89-9757-b46c5ca7f93f',1649679566139);
+INSERT INTO `t_user` VALUES ('admin','admin','true','sysadmin','true','admin:cad58e68-a4aa-47d1-bce2-1c0f06eb1c24',1651635083393);
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_volumn`
---
-
-DROP TABLE IF EXISTS `t_volumn`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_volumn` (
-  `volumn_no` varchar(100) NOT NULL,
-  `volumn_note` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`volumn_no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_volumn`
---
-
-LOCK TABLES `t_volumn` WRITE;
-/*!40000 ALTER TABLE `t_volumn` DISABLE KEYS */;
-INSERT INTO `t_volumn` VALUES ('V-Test-0001','Test Volumn');
-/*!40000 ALTER TABLE `t_volumn` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -345,12 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-15  8:17:12
-
-ALTER TABLE archive.t_doc ADD create_user varchar(100) NULL;
-
-ALTER TABLE archive.t_volumn ADD department_id varchar(100) NULL;
-
-update archive.t_volumn set volumn_no='v001', volumn_note='阜阳档案管理局', department_id='1';
-ALTER TABLE archive.t_volumn  COMMENT='全宗';
-update archive.t_doc set volumn_no='v001';
+-- Dump completed on 2022-05-06  0:12:03
