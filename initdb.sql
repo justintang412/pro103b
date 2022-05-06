@@ -348,3 +348,9 @@ UNLOCK TABLES;
 -- Dump completed on 2022-04-15  8:17:12
 
 ALTER TABLE archive.t_doc ADD create_user varchar(100) NULL;
+
+ALTER TABLE archive.t_volumn ADD department_id varchar(100) NULL;
+
+update archive.t_volumn set volumn_no='v001', volumn_note='阜阳档案管理局', department_id='1';
+ALTER TABLE archive.t_volumn  COMMENT='全宗';
+update archive.t_doc set volumn_no='v001';
