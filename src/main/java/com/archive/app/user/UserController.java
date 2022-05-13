@@ -1,5 +1,9 @@
 package com.archive.app.user;
 
+import com.archive.app.entities.User;
+import com.archive.share.DataResponse;
+import com.archive.share.DataUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +11,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class UserController {
@@ -77,4 +83,22 @@ public class UserController {
         log.info("/ccas/dashboard/user/info", token);
         return new RoleResponse(new String[] { "super_admin" });
     }
+
+    @GetMapping("/api/user/list")
+    public DataResponse<User> list(User item, HttpServletRequest request) {
+        log.info("serving " + item.getDepartmentId());
+        String query = "select username, is_admin, role_id, is_active, fullname, department_id " +
+                "from t_user";
+        if (item != null && item.getDepartmentId() != null) {
+            query = "select username, is_admin, role_id, is_active, fullname, department_id " +
+                    "from t_user where department_id='" + item.getDepartmentId() + "'";
+        }
+        log.info(query);
+        return new DataResponse<User>(jdbcTemplate
+                .queryForList(query)
+                .stream()
+                .map(v -> DataUtils.composeEntity(v, User.class))
+                .toList());
+    }
+    
 }

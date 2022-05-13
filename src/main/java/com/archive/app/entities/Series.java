@@ -1,39 +1,31 @@
 package com.archive.app.entities;
 
 public class Series {
-    String no, name, archive, archiveName, fileType, departmentId, departmentName;
-    int sortNo;
+    String seriesNo, seriesName, archiveNo, fileType, departmentId,
+            sortNo;
 
-    public String getNo() {
-        return no;
+    public String getSeriesNo() {
+        return seriesNo;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void setSeriesNo(String seriesNo) {
+        this.seriesNo = seriesNo;
     }
 
-    public String getName() {
-        return name;
+    public String getSeriesName() {
+        return seriesName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSeriesName(String seriesName) {
+        this.seriesName = seriesName;
     }
 
-    public String getArchive() {
-        return archive;
+    public String getArchiveNo() {
+        return archiveNo;
     }
 
-    public void setArchive(String archive) {
-        this.archive = archive;
-    }
-
-    public String getArchiveName() {
-        return archiveName;
-    }
-
-    public void setArchiveName(String archiveName) {
-        this.archiveName = archiveName;
+    public void setArchiveNo(String archiveNo) {
+        this.archiveNo = archiveNo;
     }
 
     public String getFileType() {
@@ -52,19 +44,11 @@ public class Series {
         this.departmentId = departmentId;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
-
-    public int getSortNo() {
+    public String getSortNo() {
         return sortNo;
     }
 
-    public void setSortNo(int sortNo) {
+    public void setSortNo(String sortNo) {
         this.sortNo = sortNo;
     }
 
