@@ -11,7 +11,7 @@ public class DataUtils {
         List<String> fieldList = Arrays.asList(fields);
         String insert = "insert into " + tableName + " (";
         String values = " values (";
-        String update = "upate " + tableName + " set ";
+        String update = "update " + tableName + " set ";
         Method[] methods = instance.getClass().getMethods();
         List<Method> methodList = Arrays.asList(methods)
                 .stream()

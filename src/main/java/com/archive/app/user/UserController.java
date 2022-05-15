@@ -100,5 +100,19 @@ public class UserController {
                 .map(v -> DataUtils.composeEntity(v, User.class))
                 .toList());
     }
+    @GetMapping("/api/user/departmentUsers")
+    public DataResponse<User> departmentUsers(User item, HttpServletRequest request) {
+        String auth = request.getHeader("Authorization");
+        log.info(auth);
+        String query = "select a.username, a.is_admin, a.role_id, a.is_active, a.fullname, a.department_id " +
+                "from t_user a where a.department_id=(select department_id from t_user where username='"+auth.split(":")[0]+"')";
+       
+        log.info(query);
+        return new DataResponse<User>(jdbcTemplate
+                .queryForList(query)
+                .stream()
+                .map(v -> DataUtils.composeEntity(v, User.class))
+                .toList());
+    }
     
 }

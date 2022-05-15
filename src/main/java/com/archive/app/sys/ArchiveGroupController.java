@@ -25,31 +25,15 @@ public class ArchiveGroupController {
         @GetMapping("/api/sys/archive-group/list")
         public DataResponse<ArchiveGroup> list(ArchiveGroup item) {
                 log.info("serving " + item.getArchiveNo());
-                if (item.getDepartmentId() != null) {
-                        return new DataResponse<ArchiveGroup>(jdbcTemplate
-                                        .queryForList("select a.archive_no, a.archive_name, d.department_id, " +
-                                                        "d.department_name from t_archive_group a, t_department d " +
-                                                        "where a.department_id =d.department_id"
-                                                        +
-                                                        " and a.department_id='" + item.getDepartmentId() + "'")
-                                        .stream()
-                                        .map(v -> DataUtils.composeEntity(v, ArchiveGroup.class))
-                                        .toList());
-                }
-                if (item.getArchiveNo() != null) {
-                        return new DataResponse<ArchiveGroup>(jdbcTemplate
-                                        .queryForList("select a.archive_no, a.archive_name, d.department_id, " +
-                                                        "d.department_name from t_archive_group a, t_department d " +
-                                                        "where a.department_id =d.department_id"
-                                                        +
-                                                        " and a.archive_no='" + item.getArchiveNo() + "'")
-                                        .stream()
-                                        .map(v -> DataUtils.composeEntity(v, ArchiveGroup.class))
-                                        .toList());
-                }
-                return new DataResponse<ArchiveGroup>(new ArrayList<ArchiveGroup>());
+                return new DataResponse<ArchiveGroup>(jdbcTemplate
+                                .queryForList("select a.archive_no, a.archive_name, d.department_id, " +
+                                                "d.department_name from t_archive_group a, t_department d " +
+                                                "where a.department_id =d.department_id")
+                                .stream()
+                                .map(v -> DataUtils.composeEntity(v, ArchiveGroup.class))
+                                .toList());
         }
-        
+
         @PostMapping("/api/sys/archive-group/save")
         public void saveOrUpate(ArchiveGroup item, HttpServletRequest request) {
                 String authorization = request.getHeader("Authorization");
@@ -61,16 +45,6 @@ public class ArchiveGroupController {
                 String sql = "insert into archive.t_archive_group (archive_no, archive_name, department_id) values ('"
                                 + item.getArchiveNo()
                                 + "','" + item.getArchiveName() + "','" + item.getDepartmentId() + "')";
-                if (item.getArchiveNo() != null) {
-                        ArchiveGroup archiveGroup = new ArchiveGroup();
-                        archiveGroup.setArchiveNo(item.getArchiveNo());
-                        if (this.list(archiveGroup).getData().size() > 0) {
-                                sql = "update archive.t_archive_group set archive_name='" + item.getArchiveName()
-                                                + "', department_id='"
-                                                + item.getDepartmentId() + "' where archive_no='" + item.getArchiveNo()
-                                                + "'";
-                        }
-                }
                 jdbcTemplate.update(sql);
         }
 }

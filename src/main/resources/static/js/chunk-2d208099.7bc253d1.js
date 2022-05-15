@@ -1,1 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d208099"],{a2a3:function(a,o,e){"use strict";e.r(o);var c=e("eaf3"),n=e("00aa"),t=[{path:"/".concat(c["a"]),meta:{title:"首页",icon:"s-home",home:"/".concat(c["a"],"/MyWorkorder")},children:n["a"]}];o["default"]={routes:t}}}]);

@@ -23,17 +23,17 @@ public class LoginController {
     @PostMapping("/api/dashboard/login")
     public void login(LoginForm loginForm, final HttpServletResponse response) {
         log.info("----------------------");
-        if (loginForm.getUsername() == null || loginForm.getT() == null || loginForm.getPassword() == null
-                || loginForm.getCaptcha() == null) {
-            return;
-        }
+        // if (loginForm.getUsername() == null || loginForm.getT() == null || loginForm.getPassword() == null
+        //         || loginForm.getCaptcha() == null) {
+        //     return;
+        // }
 
-        List<Map<String, Object>> captchaList = jdbcTemplate.queryForList(
-                "select count(*) as cnt from log_captcha where t='" + loginForm.getT() + "' and captcha='"
-                        + loginForm.getCaptcha() + "'");
-        if (captchaList.size() == 0 || captchaList.get(0).get("cnt").toString().equals("0")) {
-            return;
-        }
+        // List<Map<String, Object>> captchaList = jdbcTemplate.queryForList(
+        //         "select count(*) as cnt from log_captcha where t='" + loginForm.getT() + "' and captcha='"
+        //                 + loginForm.getCaptcha() + "'");
+        // if (captchaList.size() == 0 || captchaList.get(0).get("cnt").toString().equals("0")) {
+        //     return;
+        // }
 
         List<Map<String, Object>> userList = jdbcTemplate.queryForList(
                 "select password from t_user where username='" + loginForm.getUsername() + "' and is_active='true'");
